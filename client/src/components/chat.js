@@ -9,7 +9,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
     const [selectedMinute, setSelectedMinute] = useState('');
     const [loading, setLoading] = useState(false)
     const [minuteLoader, setMinuteLoader] = useState(false)
-    
+
     const chatLogRef = useRef(null);
     const [shouldScroll, setShouldScroll] = useState(false);
     console.log(chatLog)
@@ -23,7 +23,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         setInput('')
         
 
-        const response = await fetch('http://localhost:4000/', {
+        const response = await fetch('http://localhost:10000/', {
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({message: updatedChatLog}),
