@@ -1,12 +1,25 @@
 import { useState } from "react"
+import { Bars } from 'react-loader-spinner'
 
-function Home({setshowHome, showHome}) {
+
+function Home({submitTranscript, setTranscript}) {
 
     const [link, setLink] = useState('');
+    const [loading, setLoading] = useState(false)
 
-    function handleSubmit(e) {
-        e.preventDefault(); 
-        setshowHome(false)
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setLoading(true)
+        const response = await fetch('http://localhost:4000/transcript', {
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({url: link}),
+        })
+        const data = await response.json()
+
+        await setTranscript(data)
+        await submitTranscript(data['0'])
+        setLoading(false)
     }
 
     return (
@@ -17,22 +30,33 @@ function Home({setshowHome, showHome}) {
                 <h1>Insight.AI</h1>
 
                 <p>
-                    Introducing our AI-powered video decoder! 🚀 Simply paste a link, ask your question, and get instant clarity. 
-                    Perfect for students, enthusiasts, and curious minds. Try it now!
+                    Introducing our AI-powered Video Q&A Assistant! 🚀 Easily paste a YouTube link, pose your questions, and receive clear answers in real-time. 
+                    Perfect for students, enthusiasts, and anyone seeking deeper insights. Give it a try now and unlock the power of knowledge!
                 </p>
 
             </div>
             
             <div class="link-div">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" value={link} onChange={(event) => setLink(event.target.value)} placeholder= "Paste your Link"/>
+                    <input type="text" value={link} onChange={(event) => setLink(event.target.value)} placeholder= "Paste youtube link"/>
                     <span class="focus-bg"></span>
-                    <button type="submit" class="button-28"> Submit </button>
+                    {!loading && <button type="submit" class="button-28"> Submit </button>}
+                    {loading &&  <Bars
+                        height="60"
+                        width="200"
+                        color="#4fa94d"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        fill= "#14a4fa"
+                    />}
                 </form>
             </div>
 
             <div className ="guide">
                 <div className="box">
+                    <i class="gg-bulb"></i>
                     <h3> Examples</h3>
                     <div className = "text">
                     <p>
@@ -52,12 +76,8 @@ function Home({setshowHome, showHome}) {
                     
                 </div>
                 <div className ="box">
+                    <i class="gg-bolt"></i>
                     <h3> Capabilities</h3>
-                    <div className = "text">
-                        <p>
-                            Provides answers about specifc parts of a video.
-                        </p>
-                    </div>
                     <div className = "text">
                         <p>
                             Understands the context of the video and provide accurate responses based on the content.
@@ -65,25 +85,31 @@ function Home({setshowHome, showHome}) {
                     </div>
                     <div className = "text">
                         <p>
-                            Users can decode videos from various platforms such as YouTube, TED, Vimeo, etc.
+                            Choose specific segments of the video by minute, allowing you to focus on particular sections.
+                        </p>
+                    </div>
+                    <div className = "text">
+                        <p>
+                            Dive deep into the video content by asking about specific concepts, theories, or details.
                         </p>
                     </div>
                 </div>
                 <div className = "box">
+                    <i class="gg-danger"></i>
                     <h3> Limitations</h3>
                     <div className = "text">
                     <p>
-                        May not perform best for videos larger than 1 hour.
+                        Interpretation or context of the video can be misunderstood, leading to less precise answers.
                     </p>
                     </div>
                     <div className = "text">
                     <p>
-                        May occasionaley provide incorrect answers.
+                        May not fully grasp subtle language nuances, leading to occasional misinterpretations
                     </p>
                     </div>
                     <div className = "text">
                     <p>
-                        Interpretation or context of the video is misunderstood, leading to less precise answers.
+                        Ambiguous questions or unclear queries may result in less accurate or relevant answers.
                     </p>
                     </div>
                 </div>
