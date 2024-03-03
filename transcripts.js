@@ -42,7 +42,7 @@ async function formatTranscriptTimeFrame(url) {
 async function getTranscriptWithTimeFrame(url){
   const my_transcript = {}
   const transcript  = await formatTranscriptTimeFrame(url)
-  console.log('transcript=',transcript)
+
   for (let i = 0; i < transcript.length - 1; i++){
     timeframe = transcript[i].timeframe.split(':')[0]
     if (!(timeframe in my_transcript)){
