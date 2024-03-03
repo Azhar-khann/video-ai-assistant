@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react"
 import Chatlog from "./chatlog";
 import { ThreeDots } from 'react-loader-spinner'
-import { TailSpin,ThreeCircles } from "react-loader-spinner";
+import { ThreeCircles } from "react-loader-spinner";
 
 function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}) {
 
@@ -12,7 +12,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
 
     const chatLogRef = useRef(null);
     const [shouldScroll, setShouldScroll] = useState(false);
-    console.log(chatLog)
+
 
 
     async function handleSubmit(e){
@@ -23,7 +23,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         setInput('')
         
 
-        const response = await fetch('http://localhost:10000/', {
+        const response = await fetch('https://video-ai-assistant.onrender.com/', {
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({message: updatedChatLog}),

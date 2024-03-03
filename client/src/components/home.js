@@ -10,7 +10,7 @@ function Home({submitTranscript, setTranscript}) {
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true)
-        const response = await fetch('http://localhost:10000/transcript', {
+        const response = await fetch('https://video-ai-assistant.onrender.com/transcript', {
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({url: link}),
