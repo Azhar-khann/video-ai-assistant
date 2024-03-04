@@ -14,7 +14,7 @@ function Main() {
         const updatedChatLog = [...chatLog, { role: "user", content: data }];
         setChatLog(updatedChatLog);
 
-        const submit = await fetch('https://video-ai-assistant.onrender.com/', {
+        await fetch('https://video-ai-assistant.onrender.com/', {
             method:'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({message: updatedChatLog}),

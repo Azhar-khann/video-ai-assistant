@@ -47,7 +47,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         if (shouldScroll) {
           chatLogRef.current?.scrollIntoView({ behavior: 'auto' });
         }
-    }, [chatLog]);
+    }, [chatLog, shouldScroll]);
 
     useEffect(() => {
         if (chatLog.length === 5) {

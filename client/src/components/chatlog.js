@@ -4,7 +4,7 @@ function Chatlog({role, content}){
         <>
 
 
-            { role === 'user'  &&  content.slice(0, 10) != 'transcript' &&
+            { role === 'user'  &&  content.slice(0, 10) !== 'transcript' &&
                 <div className="chatMessage user">
 
                     <div className="userAndAvatar">
