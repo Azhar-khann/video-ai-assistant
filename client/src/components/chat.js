@@ -118,8 +118,8 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
 
 
                     
-                    <div className="selectContainer" style={{ width: '3%' }}>
-                        min
+                    <div className="selectContainer" >
+                        <h6>min</h6>
                     <select 
                         value={selectedMinute} 
                         onChange={(event) => {

@@ -510,3 +510,174 @@
   bottom: 0;
   left: 0
 }
+
+
+.selectContainer{
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectContainer h6{
+  font-weight: 100;
+  font-size: 15px;
+  margin: 0;
+  display: inline-block;
+}
+
+@media (max-width: 1200px){
+  .intro-texts{
+    width:70%;
+  }
+  .link-div{
+    width: 53%;
+  }
+
+  .main .guide{
+    width:90%;
+  }
+  .guide .box {
+    width: 23%;
+  }
+
+  .inputDiv .text_form {
+    width: 59%;
+  }
+
+  .chatMessage span {
+    font-size: 16px;
+  }
+  
+  .inputDiv span {
+    font-size: 13px;
+  }
+
+  .chatlog .chatMessage {
+    margin-bottom: 8%;
+  }
+
+  .chatLog_texts {
+    width: 60%;
+  }
+}
+
+@media (max-width: 820px){
+  .chatMessage span {
+    font-size: 15px;
+  }
+
+  .chatlog .chatMessage {
+    margin-bottom: 9%;
+  }
+
+  .chatLog_texts {
+    width: 62%;
+  }
+
+  .inputDiv .text_form {
+    width: 62%;
+  }
+
+  .inputDiv .text_form .inputborder {
+    height: 52px;
+  }
+  .inputDiv .text_form input {
+    height: 52px;
+  }
+  
+  .chatLog_texts .insight svg{
+    width:55px;
+    height:55px
+  }
+
+  .intro-texts {
+    width: 80%;
+  }
+
+  .link-div {
+    width: 58%;
+  }
+
+  .guide .box {
+    width: 30%;
+  }
+
+}
+
+@media (max-width: 550px){
+  .chatLog_texts {
+    width: 78%;
+  }
+  .chatlog .chatMessage .userAndAvatar {
+    margin-bottom: 4.5%;
+  }
+  .gg-profile {
+    margin-right: 2%;
+  }
+
+  .intro-texts p {
+    line-height: 1.5;
+  }
+
+  .link-div {
+    width: 67%;
+    margin-right: 5%;
+  }
+
+  .link-div input {
+    appearance: none;
+    margin-top: 4%;
+    height: 58px;
+    
+  }
+
+  .button-28{
+    margin-top: 13%;
+    margin-left: 10%;
+    margin-bottom: 12%;
+    width:80%;
+    height:50px;
+    font-size: 17px;
+  }
+
+  .main .guide {
+    display: flex;
+    width: 58%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .guide .box {
+    width: 100%;
+  }
+
+  .inputDiv .text_form {
+    width: 77%;
+  }
+
+  .selectContainer h6{
+    font-size: 13px;
+  }
+
+  .inputDiv select {
+    width:37px;
+    height:37px;
+  }
+  .inputDiv span {
+    font-size: 12px;
+  }
+  .inputDiv {
+    padding-bottom: 5px;
+  }
+  .inputDiv .text_form .gZmPOF {
+    margin-top: 3%;
+  }
+
+  .link-div .gZmPOF {
+    margin-top: 13%;
+    margin-left: 8%;
+    margin-bottom: 12%;
+  }
+}
