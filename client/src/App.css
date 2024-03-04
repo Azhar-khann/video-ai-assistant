@@ -376,6 +376,12 @@
   margin-top: 4%;
 }
 
+.link-div .bidabG {
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+}
+
 .chatLog_texts .gZmPOF{
   height: 50px;
   margin-left: 3%;
