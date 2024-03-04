@@ -24,7 +24,7 @@ function Chatlog({role, content}){
 
                     <div className="userAndAvatar">
                         <i class="gg-circleci"></i>
-                        <h6>Insight</h6>
+                        <h6>You</h6>
                     </div>
                     <div>
                         <span>{content}</span>
