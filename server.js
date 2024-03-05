@@ -16,6 +16,10 @@ app.use(cors());
 const PORT = process.env.PORT || 4000;
 
 
+app.get('/', (req, res, next) =>{
+  res.json('its working')
+})
+
 app.post('/transcript', async (req, res, next) =>{
   const {url} = req.body
   const transcript = await getTranscriptWithTimeFrame(url)
