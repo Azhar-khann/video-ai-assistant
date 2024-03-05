@@ -3,13 +3,11 @@
 Video AI Assistant is an experimental project aimed at leveraging ChatGPT to answer questions about videos. The project attempts to enable ChatGPT to interpret and respond to queries 
 related to the content of YouTube videos.
 
-## Technologies Used
+## Technology Stack
 
 - Node.js
 - Express.js
 - React.js
-- ChatGPT API
-- YouTube Data API
 
 ## Usage
 
