@@ -7,7 +7,7 @@ function Main() {
     const [transcript, setTranscript] = useState({})
     const [chatLog, setChatLog] = useState([
         { role: "system", content: "You will help understand and clarify any content from video transcript."},
-        { role: "user", content: "Welcome to the chat section 🎉! You've successfully submitted a link to a video. Now you can ask me anything you don't understand from the video, and I'll do my best to help you out. Additionally, you can select a specific portion of the video using the minute selector below. By default, it's set to minute 0. Feel free to explore and ask away! "}
+        { role: "user", content: "Welcome to the chat section 🎉! You've successfully submitted a link to a video. Now you can ask me anything you don't understand from the video, and I'll do my best to help you out. You can select a specific portion of the video using the minute selector below. By default, it's set to minute 0. Feel free to explore and ask away! "}
     ])
 
     async function submitTranscript(data) {

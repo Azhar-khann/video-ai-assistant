@@ -30,7 +30,7 @@ function Home({submitTranscript, setTranscript}) {
                 <h1>Insight.AI</h1>
 
                 <p>
-                    Introducing our AI-powered Video Q&A Assistant! 🚀 Easily paste a YouTube link, pose your questions, and receive clear answers in real-time. 
+                    Introducing our AI-powered Video Q&A Assistant! 🚀 Easily paste a link of Youtube Video, pose your questions, and receive clear answers in real-time. 
                     Perfect for students, enthusiasts, and anyone seeking deeper insights. Give it a try now and unlock the power of knowledge!
                 </p>
 
@@ -38,7 +38,7 @@ function Home({submitTranscript, setTranscript}) {
             
             <div class="link-div">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" value={link} onChange={(event) => setLink(event.target.value)} placeholder= "Paste youtube link"/>
+                    <input type="text" value={link} onChange={(event) => setLink(event.target.value)} placeholder= "Paste Your YouTube Video link"/>
                     <span class="focus-bg"></span>
                     {!loading && <button type="submit" class="button-28"> Submit </button>}
                     {loading &&  <Bars
