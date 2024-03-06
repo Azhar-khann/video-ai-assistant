@@ -9,6 +9,13 @@ related to the content of YouTube videos.
 - Express.js
 - React.js
 
+### Installation
+
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Run `npm install` or `yarn install` to install dependencies.
+4. Paste your OpenAI API key .env file
+
 ## Usage
 
 To use Video AI Assistant, visit the website [here](https://insightai.netlify.app/) and follow these steps:
