@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv =  require('dotenv');
 const OpenAI =  require("openai");
+const rateLimit = require('express-rate-limit');
 const getTranscriptWithTimeFrame = require('./transcripts');
 
 dotenv.config();
@@ -14,6 +15,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 const PORT = process.env.PORT || 4000;
+
+// Define rate limit options
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour window
+  max: 5, // Max 100 requests per hour per IP
+  message: 'Too many requests from this IP, please try again later.',
+});
+
+// Apply rate limiter to all requests
+app.use(limiter);
+
 
 
 app.get('/', (req, res, next) =>{
