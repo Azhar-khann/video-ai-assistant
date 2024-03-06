@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react"
 import Chatlog from "./chatlog";
 import { ThreeDots } from 'react-loader-spinner'
-import { TailSpin,ThreeCircles } from "react-loader-spinner";
+import {ThreeCircles } from "react-loader-spinner";
 
 function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}) {
 
@@ -12,7 +12,8 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
     
     const chatLogRef = useRef(null);
     const [shouldScroll, setShouldScroll] = useState(false);
-    console.log(chatLog)
+    const [error, setError] = useState(false)
+    console.log(chatLog,error)
 
 
     async function handleSubmit(e){
@@ -22,17 +23,34 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         await setChatLog(updatedChatLog);
         setInput('')
         
+        try {
+            const response = await fetch('http://localhost:4000/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: updatedChatLog }),
+            });
+        
+            if (!response.ok) {
+              throw new Error('Request failed');
+            }        
+            const data = await response.json();
+            await setChatLog(prevChatLog => [...prevChatLog, { role: "assistant", content: data}]);
 
-        const response = await fetch('http://localhost:4000/', {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({message: updatedChatLog}),
-        })
+            // Process the response as needed
+        } catch (error) {
+            // Check if the error indicates rate limit exceeded
+            let errorMessage = 'An error occurred. Please try again later.';
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                errorMessage = 'Failed to connect to the server. Please try again later.';
+            } else {
+                errorMessage = 'Rate limit exceeded. Please try again later.';
+            }
+            await setError(true);
+            await setChatLog(prevChatLog => [...prevChatLog, { role: "error", content: errorMessage}]);
 
-        const data = await response.json()
-
-        await setChatLog(prevChatLog => [...prevChatLog, { role: "assistant", content: data }]);
-        setLoading(false);
+        } finally {
+            setLoading(false);
+        }
 
     }
 
@@ -62,7 +80,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
                 <div className="chatLog_texts">
 
                     {chatLog.map(chat => { 
-                        return <Chatlog role = {chat.role} content={chat.content}/>
+                        return <Chatlog role = {chat.role} content={chat.content} error = {error}/>
                     })
                     }
 

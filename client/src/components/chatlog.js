@@ -1,10 +1,10 @@
 
-function Chatlog({role, content}){
+function Chatlog({role, content,error}){
     return (
         <>
 
 
-            { role === 'user'  &&  content.slice(0, 10) != 'transcript' &&
+            { role === 'user'  &&  content.slice(0, 10) !== 'transcript' &&
                 <div className="chatMessage user">
 
                     <div className="userAndAvatar">
@@ -32,6 +32,23 @@ function Chatlog({role, content}){
                     </div>
 
                 </div>
+            }
+
+
+            { role === 'error' &&
+                <div className="chatMessage user">
+
+                    <div className="userAndAvatar">
+                        <i class="gg-profile"></i>
+                        <h6>Insight</h6>
+                    </div>
+                    <div>
+                        <span>{content}</span>
+                        
+                    </div>
+
+                </div>
+
             }
         </>
     )
