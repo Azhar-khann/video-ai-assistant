@@ -17,8 +17,9 @@ app.use(cors());
 const PORT = process.env.PORT || 4000;
 
 
-// Set trust proxy to 1 for deployments behind a proxy like Render
-app.set('trust proxy', 1);
+
+// Set 'trust proxy' to a list of trusted proxies or IP addresses
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
 
 // Define rate limit options
 const limiter = rateLimit({
