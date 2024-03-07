@@ -17,8 +17,6 @@ app.use(cors());
 const PORT = process.env.PORT || 4000;
 
 
-// Set trust proxy to 1 for deployments behind a proxy like Render
-app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
 
 // Define rate limit options
 const limiter = rateLimit({
@@ -54,12 +52,13 @@ app.post('/transcript', async (req, res, next) =>{
 
 app.post('/', async (req, res, next) => {
 
-  const {message} = req.body
+  /* const {message} = req.body
   const completion = await openai.chat.completions.create({
     messages: message,
     model: "gpt-3.5-turbo",
   });
-  res.json(completion.choices[0].message.content)
+  res.json(completion.choices[0].message.content) */
+  res.json('demo chatpgt reply')
 
 
 });
