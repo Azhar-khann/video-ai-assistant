@@ -53,13 +53,12 @@ app.post('/transcript', async (req, res, next) =>{
 
 app.post('/', async (req, res, next) => {
 
-  /* const {message} = req.body
+  const {message} = req.body
   const completion = await openai.chat.completions.create({
     messages: message,
     model: "gpt-3.5-turbo",
   });
-  res.json(completion.choices[0].message.content) */
-  res.json('demo chatpgt reply')
+  res.json(completion.choices[0].message.content) 
 
 
 });
