@@ -16,6 +16,10 @@ app.use(cors());
 
 const PORT = process.env.PORT || 4000;
 
+
+// Set 'trust proxy' to true to trust the proxy headers and identify users correctly
+app.set('trust proxy', true);
+
 // Define rate limit options
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour window
