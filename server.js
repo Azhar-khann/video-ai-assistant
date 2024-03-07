@@ -17,8 +17,8 @@ app.use(cors());
 const PORT = process.env.PORT || 4000;
 
 
-// Set 'trust proxy' to true to trust the proxy headers and identify users correctly
-app.set('trust proxy', true);
+// Set trust proxy to 1 for deployments behind a proxy like Render
+app.set('trust proxy', 1);
 
 // Define rate limit options
 const limiter = rateLimit({
