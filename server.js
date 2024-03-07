@@ -16,7 +16,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 4000;
 
-
+app.set('trust proxy', 1);
+app.get('/ip', (request, response) => response.send(request.ip));
 
 // Define rate limit options
 const limiter = rateLimit({
