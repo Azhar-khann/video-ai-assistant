@@ -9,11 +9,12 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
     const [selectedMinute, setSelectedMinute] = useState('');
     const [loading, setLoading] = useState(false)
     const [minuteLoader, setMinuteLoader] = useState(false)
+    const [error, setError] = useState(false)
 
     const chatLogRef = useRef(null);
     const [shouldScroll, setShouldScroll] = useState(false);
 
-
+    console.log(chatLog)
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -23,16 +24,34 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         setInput('')
         
 
-        const response = await fetch('https://video-ai-assistant.onrender.com/', {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({message: updatedChatLog}),
-        })
+        try {
+            const response = await fetch('http://localhost:4000/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: updatedChatLog }),
+            });
+        
+            if (!response.ok) {
+              throw new Error('Request failed');
+            }        
+            const data = await response.json();
+            await setChatLog(prevChatLog => [...prevChatLog, { role: "assistant", content: data}]);
 
-        const data = await response.json()
+            // Process the response as needed
+        } catch (error) {
+            // Check if the error indicates rate limit exceeded
+            let errorMessage = 'An error occurred.';
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                errorMessage = 'Failed to connect to the server. Please try again later.';
+            } else {
+                errorMessage = 'Rate limit exceeded. You have reached the maximum number of requests allowed per hour. Please wait for some time before trying again. This limit is in place to ensure fair usage of the service for all users. The maximum number of questions you can ask per hour is 8.';
+            }
+            await setError(true)
+            await setChatLog(prevChatLog => [...prevChatLog, { role: "error", content: errorMessage}]);
 
-        await setChatLog(prevChatLog => [...prevChatLog, { role: "assistant", content: data }]);
-        setLoading(false);
+        } finally {
+            setLoading(false);
+        }
 
     }
 
@@ -62,7 +81,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
                 <div className="chatLog_texts">
 
                     {chatLog.map(chat => { 
-                        return <Chatlog role = {chat.role} content={chat.content}/>
+                        return <Chatlog role = {chat.role} content={chat.content} />
                     })
                     }
 
@@ -100,7 +119,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
 
                     <form onSubmit={handleSubmit} className="text_form">
                         <div className="inputborder">
-                            <input type="text" value={input} disabled={loading || minuteLoader} onChange={(event) => setInput(event.target.value)} placeholder="Ask a question about the video here..." />
+                            <input type="text" value={input} disabled={loading || minuteLoader ||error} onChange={(event) => setInput(event.target.value)} placeholder="Ask a question about the video here..." />
 
                             {minuteLoader &&
                             <ThreeCircles

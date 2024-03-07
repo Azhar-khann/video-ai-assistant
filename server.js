@@ -19,12 +19,22 @@ const PORT = process.env.PORT || 4000;
 // Define rate limit options
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour window
-  max: 5, // Max 100 requests per hour per IP
+  max: 8, // Max 8 requests per hour per IP
   message: 'Too many requests from this IP, please try again later.',
-});
+}); 
 
-// Apply rate limiter to all requests
-app.use(limiter);
+// Custom middleware function to handle rate limiting for app.post('/')
+const postLimiter = (req, res, next) => {
+  // Apply the rate limiter middleware only for app.post('/')
+  if (req.originalUrl === '/' && req.method === 'POST') {
+    limiter(req, res, next);
+  } else {
+    next();
+  }
+};
+
+// Apply the custom middleware function to the desired route
+app.use(postLimiter);  
 
 
 
@@ -47,14 +57,18 @@ app.post('/', async (req, res, next) => {
   });
   res.json(completion.choices[0].message.content)
 
-  /* const completion = await openai.chat.completions.create({
-    messages: message,
-    model: "gpt-3.5-turbo",
-  });
-  res.json({
-    data: completion.choices[0]
-  }) */
 
+});
+
+
+
+// Error handling middleware for rate limit exceeded
+app.use((err, req, res, next) => {
+  if (err instanceof rateLimit.RateLimitExceeded) {
+    res.status(429).json({ error: 'Rate limit exceeded. Please try again later.' });
+  } else {
+    next(err);
+  }
 });
 
 

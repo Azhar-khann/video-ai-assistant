@@ -526,6 +526,10 @@
   display: inline-block;
 }
 
+.chatMessage .error{
+  color: #ff3f3f;
+}
+
 @media (max-width: 1200px){
   .intro-texts{
     width:70%;

@@ -48,6 +48,22 @@ function Chatlog({role, content}){
 
                 </div>
             }
+
+            { role === 'error' &&
+                <div className="chatMessage user">
+
+                    <div className="userAndAvatar">
+                        <i class="gg-circleci"></i>
+                        <h6>Insight</h6>
+                    </div>
+                    <div>
+                        <span className="error">{content}</span>
+                        
+                    </div>
+
+                </div>
+
+            }
         </>
     )
 }
