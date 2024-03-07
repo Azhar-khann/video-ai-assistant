@@ -25,7 +25,7 @@ function Chat({chatLog, setChatLog, submitTranscript, setTranscript, transcript}
         
 
         try {
-            const response = await fetch('http://localhost:4000/', {
+            const response = await fetch('https://video-ai-assistant.onrender.com/', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ message: updatedChatLog }),
